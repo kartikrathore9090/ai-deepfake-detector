@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>TruthLens AI</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+body{
+background:linear-gradient(135deg,#821260,#1e293b);
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+color:white;
+}
+
+.card{
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(10px);
+padding:40px;
+border-radius:15px;
+width:420px;
+text-align:center;
+box-shadow:0 0 25px rgba(0,0,0,0.4);
+}
+
+h1{
+margin-bottom:10px;
+}
+
+p{
+margin-bottom:25px;
+color:#cbd5f5;
+}
+
+.upload{
+border:2px dashed #64748b;
+padding:15px;
+border-radius:10px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.upload:hover{
+border-color:#22c55e;
+}
+
+button{
+margin-top:20px;
+padding:12px 30px;
+background:#22c55e;
+border:none;
+border-radius:8px;
+color:white;
+font-size:16px;
+cursor:pointer;
+}
+
+button:hover{
+background:#16a34a;
+}
+
+img{
+margin-top:20px;
+max-width:250px;
+border-radius:10px;
+}
+
+.result{
+margin-top:25px;
+}
+
+.real{
+color:#22c55e;
+font-size:24px;
+}
+
+.fake{
+color:#ef4444;
+font-size:24px;
+}
+
+.bar{
+width:100%;
+height:18px;
+background:#1e293b;
+border-radius:10px;
+margin-top:10px;
+overflow:hidden;
+}
+
+.fill{
+height:100%;
+background:#22c55e;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<h1>🔍 TruthLens AI</h1>
+<p>Detect AI Manipulated Images Instantly</p>
+
+<form method="POST" enctype="multipart/form-data">
+
+<label class="upload">
+
+Click or Drag Image Here
+
+<input type="file" name="image" accept="image/*" onchange="previewImage(event)" hidden required>
+
+</label>
+
+<button type="submit">Analyze Image</button>
+
+</form>
+
+<img id="preview">
+
+{% if result %}
+
+<div class="result">
+
+{% if result == "REAL IMAGE" %}
+<h2 class="real">✔ {{ result }}</h2>
+{% else %}
+<h2 class="fake">⚠ {{ result }}</h2>
+{% endif %}
+
+<p>Confidence: {{ (confidence*100)|round(2) }}%</p>
+
+<div class="bar">
+<div class="fill" style="width: {{ (confidence*100)|round(2) }}%"></div>
+</div>
+{% if output_image %}
+
+<h3>Suspicious Region Analysis</h3>
+
+<img src="{{ output_image }}" width="300">
+
+{% endif %}
+
+</div>
+
+{% endif %}
+
+</div>
+
+<script>
+
+function previewImage(event){
+
+const reader = new FileReader();
+
+reader.onload = function(){
+document.getElementById('preview').src = reader.result;
+}
+
+reader.readAsDataURL(event.target.files[0]);
+
+}
+
+</script>
+
+</body>
+
+</html>
