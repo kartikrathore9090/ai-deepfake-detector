@@ -32,4 +32,10 @@ Result Display
 ## Run Locally
 
 pip install -r requirements.txt
+
 python app.py
+
+## Demo
+
+![Deepfake Detector Demo](demo.png)
+![Deepfake Detector Demo](demo1.png)
