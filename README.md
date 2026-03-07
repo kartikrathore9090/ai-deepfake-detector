@@ -37,5 +37,6 @@ python app.py
 
 ## Demo
 
-![Deepfake Detector Demo](demo.png)
-![Deepfake Detector Demo](demo1.png)
+![Deepfake Detector Demo](Demo.png)
+![Deepfake Detector Demo](Demo1.png)
+
